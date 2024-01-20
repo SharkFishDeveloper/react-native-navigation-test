@@ -17,11 +17,18 @@ const Index = () => {
                 <Stack.Screen
                     name="Home"
                     component={App}
+                    options={{title:'Home screen admin'}}
                 />
                 <Stack.Screen
+                    name="CustomDrawer"
+                    component={CustomDrawer}
+                    options={{headerShown:false}}
+                />
+                {/* <Stack.Screen
                     name="Second"
                     component={Second}
-                />
+                    options={{headerShown:true}}
+                /> */}
 
             </Stack.Navigator>
         </NavigationContainer>

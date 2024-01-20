@@ -1,7 +1,8 @@
 import { ScrollView, StyleSheet, Text, View,TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
+import axios from 'axios';
 import CustomDrawer from './drawer/SideDrawer';
+import Second from './Second';
 
 interface post {
   id: Number;
@@ -15,19 +16,20 @@ const App = ({navigation}) => {
 
   useEffect(() => {
     axios
-      .get<post[]>("https://jsonplaceholder.typicode.com/posts?_limit=20")
+      .get<post[]>('https://jsonplaceholder.typicode.com/posts?_limit=20')
       .then(res => {
         setData(res.data);
         setLoading(false);
       }).catch(error => {
-        console.log("error ", error);
+        console.log('error ', error);
         setLoading(false);
       });
   }, []);
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <CustomDrawer/>
-     <TouchableOpacity onPress={()=>navigation.push('Second')} style={styles.buttonContainer}><Text style={styles.buttonText}>Go to comments</Text></TouchableOpacity>
+     <TouchableOpacity onPress={()=>(navigation.push('CustomDrawer'))}
+
+     style={styles.buttonContainer}><Text style={styles.buttonText}>Go to comments</Text></TouchableOpacity>
       <Text style={styles.heading}>Simple React posts</Text>
       {loading && <Text>Loading...</Text>}
       {data && data.map(post => (
@@ -52,11 +54,11 @@ const styles = StyleSheet.create({
     justifyContent:'center',//Vertically
     alignItems:'center',//horizontally
     alignSelf:'flex-end',
-    margin:20
+    margin:20,
   },
   buttonText:{
     color:'white',
-    fontWeight:'bold'
+    fontWeight:'bold',
   },
   card: {
    margin:10,
@@ -65,12 +67,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderEndColor:'black'
+    borderEndColor:'black',
   },
   heading:{
     alignSelf:'center',
     color:'black',
     fontSize:16,
-    fontWeight:'700'
-  }
+    fontWeight:'700',
+  },
 });
